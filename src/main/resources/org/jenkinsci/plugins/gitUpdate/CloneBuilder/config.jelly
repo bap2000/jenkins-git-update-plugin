@@ -1,0 +1,26 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <f:entry title="${%gitVersion}">
+        <select class="setting-input" name="gitToolName">
+            <j:forEach var="gitTool" items="${descriptor.gitTools}">
+                <f:option selected="${gitTool.name==gitToolName}">${gitTool.name}</f:option>
+            </j:forEach>
+        </select>
+    </f:entry>
+    <f:entry title="${%repository}" field="repository">
+        <f:textbox />
+    </f:entry>
+    <f:entry title="${%directory}" field="directory">
+        <f:textbox />
+    </f:entry>
+    <f:entry title="${%branch}" field="branch">
+        <f:textbox />
+    </f:entry>
+    <f:advanced>
+        <f:entry title="${%username}" field="username">
+            <f:textbox />
+        </f:entry>
+        <f:entry title="${%email}" field="email">
+            <f:textbox />
+        </f:entry>
+    </f:advanced>
+</j:jelly>

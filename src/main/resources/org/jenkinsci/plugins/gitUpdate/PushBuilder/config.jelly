@@ -1,0 +1,26 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <f:entry title="${%gitVersion}">
+        <select class="setting-input" name="gitToolName">
+            <j:forEach var="gitTool" items="${descriptor.gitTools}">
+                <f:option selected="${gitTool.name==gitToolName}">${gitTool.name}</f:option>
+            </j:forEach>
+        </select>
+    </f:entry>
+    <f:entry title="${%directory}" field="directory">
+        <f:textbox />
+    </f:entry>
+    <f:entry title="${%commit.radio}">
+        <f:nested>
+            <f:radioBlock title="${%commit.message}" name="commitMessage" value="${descriptor.MESSAGE}" checked="${!instance.useFile}">
+                <f:entry help="${descriptor.getHelpFile('message')}">
+                    <f:textbox name="message" value="${instance.commitMessage.message}" default="${descriptor.defaultCommitMessage}" checkUrl="${descriptor.getCheckUrl('message')}"/>
+                </f:entry>
+            </f:radioBlock>
+            <f:radioBlock title="${%commit.file}" name="commitMessage" value="${descriptor.FILE}" checked="${instance.useFile}">
+                <f:entry help="${descriptor.getHelpFile('messageFile')}">
+                    <f:textbox name="messageFile" value="${instance.commitMessage.messageFile}" checkUrl="${descriptor.getCheckUrl('messageFile')}"/>
+                </f:entry>
+            </f:radioBlock>
+        </f:nested>
+    </f:entry>
+</j:jelly>
